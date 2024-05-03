@@ -2,7 +2,8 @@
 import EventsComponent from "@/components/catalogue/Events.component.vue";
 export default {
   name: "CatalogueComponent",
-  components: {EventsComponent}
+  components: {EventsComponent},
+
 }
 
 
@@ -18,7 +19,6 @@ export default {
 
       <div class="event" id="eventos">
         <h2>Próximos eventos</h2>
-
         <br>
 
         <div class="card-container">
