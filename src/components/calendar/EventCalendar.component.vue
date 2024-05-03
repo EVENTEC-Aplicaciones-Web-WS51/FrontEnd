@@ -1,12 +1,10 @@
 <script>
-import EventsComponent from "@/components/catalogue/Events.component.vue";
+
+
 export default {
-  name: "CatalogueComponent",
-  components: {EventsComponent},
+  name: "EventCalendar.component",
 
 }
-
-
 </script>
 
 <template>
@@ -18,12 +16,13 @@ export default {
       <div class="socials"></div>
 
       <div class="event" id="eventos">
-        <h2>Próximos eventos</h2>
+        <h2>Calendario</h2>
+
         <br>
 
         <div class="card-container">
 
-          <events-component></events-component>
+
 
         </div>
       </div>

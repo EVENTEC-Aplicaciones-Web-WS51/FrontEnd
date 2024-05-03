@@ -1,3 +1,39 @@
+<script>
+import Card from 'primevue/card';
+import Button from 'primevue/button';
+export default {
+  name: "EventsComponent",
+  data(){
+    return {
+      events: []
+    }
+  },
+
+
+
+  components: {
+    Card,
+    Button
+  },
+
+  created() {
+    fetch("http://localhost:3000/eventos").then(response => {
+      return response.json()
+    }).then(data => {
+      this.events = data
+    }).catch(error => {
+      console.log(error)
+    })
+  },
+
+  methods: {
+    goToCalendar() {
+      this.$router.push('/event-calendar');
+    },
+  }
+}
+</script>
+
 <template>
   <div>Consumo de API</div>
 <div class="flex flex-wrap">
@@ -14,7 +50,7 @@
     </template>
     <template #footer>
       <div class="flex gap-3 mt-1">
-        <Button label="Ver detalles" severity="secondary" outlined class="w-full"></Button>
+        <Button label="Ver detalles" severity="secondary" outlined class="w-full" @click="goToCalendar"></Button>
         <Button label="Comprar" class="w-full"></Button>
       </div>
     </template>
@@ -24,33 +60,7 @@
 
 </template>
 
-<script>
-import Card from 'primevue/card';
-import Button from 'primevue/button';
-export default {
-  name: "EventsComponent",
-  data(){
-    return {
-      events: []
-    }
-  },
-  components: {
-    Card,
-    Button
-  },
 
-  created() {
-    fetch("http://localhost:3000/eventos").then(response => {
-      return response.json()
-    }).then(data => {
-      this.events = data
-    }).catch(error => {
-      console.log(error)
-    })
-  }
-
-}
-</script>
 
 <style scoped>
 .card-margin {
