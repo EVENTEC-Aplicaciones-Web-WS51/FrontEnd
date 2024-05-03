@@ -1,27 +1,25 @@
 <template>
   <div>Consumo de API</div>
-
-
-  <Card style="width: 22rem; overflow: hidden;">
+<div class="flex flex-wrap">
+  <Card class="w-1/4 p-2 card-margin" style="width: 22rem; overflow: hidden;" v-for="event in events" :key="event.id">
     <template #header>
-      <img alt="user header" src="https://primefaces.org/cdn/primevue/images/usercard.png" />
+      <img alt="user header" :src="require('@/assets/data/' + event.imagen)"/>
     </template>
-    <template #title>Advanced Card</template>
-    <template #subtitle>Card subtitle</template>
+    <template #title>{{event.nombre}}</template>
+    <template #subtitle>{{event.tipo}}</template>
     <template #content>
       <p class="m-0">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae numquam deserunt quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate neque
-        quas!
+        {{event.descripcion}}
       </p>
     </template>
     <template #footer>
       <div class="flex gap-3 mt-1">
-        <Button label="Cancel" severity="secondary" outlined class="w-full"></Button>
-        <Button label="Save" class="w-full"></Button>
+        <Button label="Ver detalles" severity="secondary" outlined class="w-full"></Button>
+        <Button label="Comprar" class="w-full"></Button>
       </div>
     </template>
   </Card>
-
+</div>
 
 
 </template>
@@ -31,13 +29,38 @@ import Card from 'primevue/card';
 import Button from 'primevue/button';
 export default {
   name: "EventsComponent",
+  data(){
+    return {
+      events: []
+    }
+  },
   components: {
     Card,
     Button
+  },
+
+  created() {
+    fetch("http://localhost:3000/eventos").then(response => {
+      return response.json()
+    }).then(data => {
+      this.events = data
+    }).catch(error => {
+      console.log(error)
+    })
   }
+
 }
 </script>
 
 <style scoped>
+.card-margin {
+  margin: 1rem;
+}
+img{
+  width: 100%;
+  height: 320px;
+}
+
+
 
 </style>
