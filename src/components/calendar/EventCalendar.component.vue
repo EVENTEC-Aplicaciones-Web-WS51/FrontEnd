@@ -1,17 +1,35 @@
 <script>
 
+import Accordion from 'primevue/accordion';
+import AccordionTab from 'primevue/accordiontab';
+
+import Calendar from 'primevue/calendar';
+
+import Toolbar from 'primevue/toolbar';
+import Button from 'primevue/button';
+import SplitButton from 'primevue/splitbutton';
+
+
+
 
 export default {
   name: "EventCalendar.component",
-
+  components: {
+    Calendar,
+    Accordion,
+    AccordionTab,
+    Toolbar,
+    Button,
+    SplitButton,
+  }
 }
 </script>
 
 <template>
   <div class="container">
     <div class="destination__container">
-      <img class="bg__img__1" src="@/assets/images/puntos.png" alt="bg" />
-      <img class="bg__img__2" src="@/assets/images/flechas.png" alt="bg" />
+      <img class="bg__img__1" src="@/assets/images/puntos.png" alt="bg"/>
+      <img class="bg__img__2" src="@/assets/images/flechas.png" alt="bg"/>
 
       <div class="socials"></div>
 
@@ -21,9 +39,61 @@ export default {
         <br>
 
         <div class="card-container">
+          <div class="calendar">
+            <Calendar v-model="date" inline showWeek/>
+          </div>
+          <div class="form">
+
+            <div class="card">
+              <Toolbar>
+                <template #start>
+                  <Button icon="pi pi-plus" class="mr-2" severity="secondary"/>
+                  <Button icon="pi pi-print" class="mr-2" severity="secondary"/>
+                  <Button icon="pi pi-upload" severity="secondary"/>
+                </template>
+
+                <template #end>
+                  <SplitButton label="Save" :model="items"></SplitButton>
+                </template>
+              </Toolbar>
+            </div>
 
 
-
+            <div class="card">
+              <Accordion :activeIndex="1">
+                <AccordionTab header="Datos iniciales del evento">
+                  <p class="m-0">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
+                    et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                    aliquip ex ea commodo
+                    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
+                    nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+                    mollit anim id est laborum.
+                  </p>
+                </AccordionTab>
+                <AccordionTab header="Header II">
+                  <p class="m-0">
+                    Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium,
+                    totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae
+                    dicta sunt explicabo. Nemo enim
+                    ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni
+                    dolores eos qui ratione voluptatem sequi nesciunt. Consectetur, adipisci velit, sed quia non numquam
+                    eius modi.
+                  </p>
+                </AccordionTab>
+                <AccordionTab header="Header III">
+                  <p class="m-0">
+                    At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum
+                    deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non
+                    provident, similique sunt in culpa qui
+                    officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est
+                    et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit
+                    quo minus.
+                  </p>
+                </AccordionTab>
+              </Accordion>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -34,19 +104,19 @@ export default {
 <style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap");
 
-:root {
-  --primary-color: #0B3C5D;
-  --secondary-color: #0B3C5D;
-  --text-dark: #0f172a;
-  --text-light: #94a3b8;
-  --white: #ffffff;
-  --max-width: 1400px;
+.card-container {
+  display: flex;
+  justify-content: space-between;
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+.calendar {
+  flex: 1;
+  /* Añade cualquier estilo adicional para el calendario aquí */
+}
+
+.form {
+  flex: 1;
+  /* Añade cualquier estilo adicional para el formulario aquí */
 }
 
 .container {
