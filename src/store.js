@@ -1,16 +1,12 @@
-// src/store.js
-import Vue from 'vue';
-import Vuex from 'vuex';
+import { createStore } from 'vuex';
 
-Vue.use(Vuex);
-
-export default new Vuex.Store({
+export default createStore({
     state: {
-        isLoginVisible: true
+        isLoginClicked: false
     },
     mutations: {
-        toggleLogin(state) {
-            state.isLoginVisible = !state.isLoginVisible;
+        setLoginClicked(state, value) {
+            state.isLoginClicked = value;
         }
     }
 });
