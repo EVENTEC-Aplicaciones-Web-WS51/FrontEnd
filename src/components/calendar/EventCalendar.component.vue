@@ -8,19 +8,29 @@ import Calendar from 'primevue/calendar';
 import Toolbar from 'primevue/toolbar';
 import Button from 'primevue/button';
 import SplitButton from 'primevue/splitbutton';
+import InputText from "primevue/inputtext";
+import InputGroupAddon from "primevue/inputgroupaddon";
+import InputGroup from "primevue/inputgroup";
+import InputIcon from "primevue/inputicon";
 
+import InputNumber from 'primevue/inputnumber';
 
 
 
 export default {
   name: "EventCalendar.component",
   components: {
+    InputIcon,
     Calendar,
     Accordion,
     AccordionTab,
     Toolbar,
     Button,
     SplitButton,
+    InputText,
+    InputGroupAddon,
+    InputGroup,
+    InputNumber
   }
 }
 </script>
@@ -34,7 +44,8 @@ export default {
       <div class="socials"></div>
 
       <div class="event" id="eventos">
-        <h2>Calendario</h2>
+        <h2>DALE INICIO A UNA GRAN EXPERIENCIA</h2>
+        <h5>Encuentra el mejor día para crear tu evento</h5>
 
         <br>
 
@@ -60,39 +71,55 @@ export default {
 
 
             <div class="card">
-              <Accordion :activeIndex="1">
+              <Accordion class="my-accordion" :activeIndex="0">
                 <AccordionTab header="Datos iniciales del evento">
                   <p class="m-0">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                    et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                    aliquip ex ea commodo
-                    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-                    nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-                    mollit anim id est laborum.
-                  </p>
+                    Considera al crear tu próximo gran evento un nombre llamativo, un lugar propicio y la mejor fecha
+                    para que todos tus invitados puedan asistir.
+                  </p><br>
+
+                  <div class="card flex flex-column md:flex-column gap-3">
+                    <InputGroup>
+                      <InputGroupAddon>
+                        <i class="pi pi-pencil"></i>
+                      </InputGroupAddon>
+                      <InputText placeholder="Nombre"/>
+                    </InputGroup>
+
+                    <InputGroup>
+                      <InputGroupAddon>
+                        <i class="pi pi-directions-alt"></i>
+                      </InputGroupAddon>
+                      <InputText placeholder="Ubicación"/>
+                    </InputGroup>
+
+                    <Calendar v-model="templatedisplay" showIcon iconDisplay="input" timeOnly>
+                      <template #inputicon="{ clickCallback }">
+                        <InputIcon class="pi pi-clock cursor-pointer" @click="clickCallback" />
+                      </template>
+                    </Calendar>
+
+
+                  </div>
+
                 </AccordionTab>
-                <AccordionTab header="Header II">
+                <AccordionTab header="Requisitos del local">
                   <p class="m-0">
-                    Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium,
-                    totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae
-                    dicta sunt explicabo. Nemo enim
-                    ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni
-                    dolores eos qui ratione voluptatem sequi nesciunt. Consectetur, adipisci velit, sed quia non numquam
-                    eius modi.
-                  </p>
+                    Establece un aforo de personas para tu evento. Ten en cuenta la cantidad límite de la ubicación
+                  </p><br>
+                  <InputNumber v-model="value1" inputId="minmax-buttons" mode="decimal" showButtons :min="0" :max="100" />
                 </AccordionTab>
-                <AccordionTab header="Header III">
+                <AccordionTab header="Cantidad de entradas y precio">
                   <p class="m-0">
-                    At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum
-                    deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non
-                    provident, similique sunt in culpa qui
-                    officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est
-                    et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit
-                    quo minus.
+                    Defina la cantidad de entradas y el precios que tendrán en la fecha próxima de tu evento.
                   </p>
+                  <InputNumber v-model="value2" inputId="minmax-buttons" mode="decimal" showButtons :min="0" :max="100" />
+                  <InputNumber v-model="value1" inputId="stacked-buttons" showButtons mode="currency" currency="USD" />
+
                 </AccordionTab>
               </Accordion>
             </div>
+            <Button class="btn_crearevento" label="Crear Evento" icon="pi pi-check"/>
           </div>
         </div>
       </div>
@@ -103,6 +130,11 @@ export default {
 
 <style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap");
+
+.btn_crearevento {
+  margin-top: 10px;
+}
+
 
 .card-container {
   display: flex;
