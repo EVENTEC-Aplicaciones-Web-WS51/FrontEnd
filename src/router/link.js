@@ -24,3 +24,8 @@ const router = createRouter({
 })
 
 export default router
+
+/*
+* Dependencias:
+* npm i json-server faker lodash
+* */
