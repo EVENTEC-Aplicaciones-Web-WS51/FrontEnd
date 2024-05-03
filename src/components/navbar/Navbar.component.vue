@@ -1,3 +1,29 @@
+<template>
+  <div class="container">
+    <nav>
+      <div class="nav__logo">
+        <a>
+          <img src="../../assets/images/myevent_logo.png" alt="logo" />
+        </a>
+      </div>
+      <ul class="nav__links">
+        <li class="link"><a @click="goToHome">Inicio</a></li>
+        <li class="link"><a @click="goToCatalogue">MyEvent</a></li>
+        <li class="link"><a @click="goToAbout">Nosotros</a></li>
+        <li class="link"><a @click="goToContact">Contactanos</a></li>
+      </ul>
+      <div class="search">
+        <input type="text" placeholder="Buscar"/>
+        <span><i class="ri-search-line"></i></span>
+      </div>
+      <div class="login" v-if="isLoginVisible && !isLoginClicked" @click="goToDifferentPath">
+        Login
+        <span><i class="ri-user-3-fill"></i></span>
+      </div>
+    </nav>
+  </div>
+</template>
+
 <script>
 export default {
   name: "NavbarComponent",
@@ -6,40 +32,27 @@ export default {
       isLoginVisible: true
     };
   },
+  computed: {
+    isLoginClicked() {
+      return this.$store.state.isLoginClicked;
+    }
+  },
   methods: {
     toggleLogin() {
       this.isLoginVisible = !this.isLoginVisible;
-    }
+    },
+    goToDifferentPath() {
+      this.$router.push('/login');
+      this.isLoginVisible = !this.isLoginVisible;
+      this.$store.commit('setLoginClicked', true);
+    },
+    goToHome() { this.$router.push('/home'); },
+    goToCatalogue() { this.$router.push('/catalogue'); },
+    goToAbout() { this.$router.push('/about'); },
+    goToContact() { this.$router.push('/contact'); }
   }
 }
 </script>
-
-<template>
-  <div class="container">
-    <nav>
-      <div class="nav__logo">
-        <a href="home">
-          <img src="../../assets/images/myevent_logo.png" alt="logo" />
-        </a>
-      </div>
-      <ul class="nav__links">
-        <li class="link"><a href="home">Inicio</a></li>
-        <li class="link"><a href="catalogue">MyEvent</a></li>
-        <li class="link"><a href="about">Nosotros</a></li>
-        <li class="link"><a href="contact">Contactanos</a></li>
-      </ul>
-      <div class="search">
-        <input type="text" placeholder="Buscar"/>
-        <span><i class="ri-search-line"></i></span>
-      </div>
-      <div class="login" v-if="isLoginVisible" @click="toggleLogin">
-        Login
-        <span><i class="ri-user-3-fill"></i></span>
-      </div>
-    </nav>
-  </div>
-
-</template>
 
 <style scoped>
 nav {
@@ -122,7 +135,6 @@ nav {
   border-radius: 100%;
 }
 
-/* Ajustes para dispositivos móviles */
 @media (max-width: 900px) {
   .container {
     padding: 0.5rem;
@@ -162,5 +174,4 @@ nav {
     width: 100%;
   }
 }
-
 </style>
