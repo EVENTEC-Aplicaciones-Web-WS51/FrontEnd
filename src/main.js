@@ -2,7 +2,7 @@ import { createApp } from 'vue';
 import App from './App.vue';
 import PrimeVue from 'primevue/config';
 import router from "@/router/link";
-// src/main.js
+import store from './store';
 
 import 'primevue/resources/themes/saga-blue/theme.css';      //theme
 import 'primevue/resources/primevue.min.css';                //core css
@@ -12,5 +12,8 @@ import 'remixicon/fonts/remixicon.css'                      //flex layout
 
 const app=createApp(App);
 
-app.use(router, PrimeVue, {ripple: true});
-app.mount('#app')
+app.use(router);
+app.use(PrimeVue, {ripple: true});
+app.use(store); // Asegúrate de usar el store en tu aplicación
+
+app.mount('#app');
