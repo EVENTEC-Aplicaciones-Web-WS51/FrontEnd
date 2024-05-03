@@ -11,6 +11,7 @@
         <li class="link"><a @click="goToCatalogue">MyEvent</a></li>
         <li class="link"><a @click="goToAbout">Nosotros</a></li>
         <li class="link"><a @click="goToContact">Contactanos</a></li>
+        <li class="link"><a @click="goToEventForm">Crear Evento</a></li>
       </ul>
       <div class="search">
         <input type="text" placeholder="Buscar"/>
@@ -49,7 +50,8 @@ export default {
     goToHome() { this.$router.push('/home'); },
     goToCatalogue() { this.$router.push('/catalogue'); },
     goToAbout() { this.$router.push('/about'); },
-    goToContact() { this.$router.push('/contact'); }
+    goToContact() { this.$router.push('/contact'); },
+    goToEventForm() { this.$router.push('/eventForm'); }
   }
 }
 </script>
