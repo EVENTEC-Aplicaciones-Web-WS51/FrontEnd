@@ -3,8 +3,6 @@ import HomeComponent from '@/components/home/Home.component.vue'
 import CatalogueComponent from "@/components/catalogue/Catalogue.component.vue";
 import AboutComponent from "@/components/about/About.component.vue";
 import ContactComponent from "@/components/contact/Contact.component.vue";
-import EventCalendarComponent from "@/components/eventCalendar/EventCalendar.component.vue";
-
 
 
 const routes = [
@@ -13,7 +11,6 @@ const routes = [
     { path: '/catalogue', component: CatalogueComponent },
     { path: '/about', component: AboutComponent },
     { path: '/contact', component: ContactComponent },
-    { path: '/event-calendar', component: EventCalendarComponent },
 
 ]
 

@@ -2,12 +2,7 @@
 import EventsComponent from "@/components/catalogue/Events.component.vue";
 export default {
   name: "CatalogueComponent",
-  components: {EventsComponent},
-  methods: {
-    navigateToEventCalendar() {
-      this.$router.push('/event-calendar');
-    }
-  }
+  components: {EventsComponent}
 }
 
 
@@ -22,12 +17,7 @@ export default {
       <div class="socials"></div>
 
       <div class="event" id="eventos">
-        <div>
-          <h2>Próximos eventos</h2>
-          <button class="add-button" aria-label="add" @click="navigateToEventCalendar">
-            <i class="pi pi-plus"></i>
-          </button>
-        </div>
+        <h2>Próximos eventos</h2>
 
         <br>
 
@@ -289,12 +279,6 @@ nav {
   .event-card {
     width: 100%;
   }
-}
-
-.add-button {
-  color: black;
-  font-size: 10px;
-  background-color: transparent;
 }
 
 </style>
