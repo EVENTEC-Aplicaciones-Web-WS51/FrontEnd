@@ -50,6 +50,7 @@ export default {
     </template>
     <template #footer>
       <div class="flex gap-3 mt-1">
+        <!-- -->
         <Button label="Ver detalles" severity="secondary" outlined class="w-full" @click="goToCalendar"></Button>
         <Button label="Comprar" class="w-full"></Button>
       </div>
