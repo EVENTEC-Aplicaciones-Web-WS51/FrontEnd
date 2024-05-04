@@ -1,3 +1,31 @@
+<script>
+import Card from 'primevue/card';
+import Button from 'primevue/button';
+
+export default {
+  name: "EventsComponent",
+  data(){
+    return {
+      events: []
+    }
+  },
+  components: {
+    Card,
+    Button
+  },
+
+  created() {
+    fetch("http://localhost:3000/eventos").then(response => {
+      return response.json()
+    }).then(data => {
+      this.events = data
+    }).catch(error => {
+      console.log(error)
+    })
+  }
+
+}
+</script>
 <template>
   <div>Consumo de API</div>
 <div class="flex flex-wrap">
@@ -26,33 +54,6 @@
 
 </template>
 
-<script>
-import Card from 'primevue/card';
-import Button from 'primevue/button';
-export default {
-  name: "EventsComponent",
-  data(){
-    return {
-      events: []
-    }
-  },
-  components: {
-    Card,
-    Button
-  },
-
-  created() {
-    fetch("http://localhost:3000/eventos").then(response => {
-      return response.json()
-    }).then(data => {
-      this.events = data
-    }).catch(error => {
-      console.log(error)
-    })
-  }
-
-}
-</script>
 
 <style scoped>
 .card-margin {

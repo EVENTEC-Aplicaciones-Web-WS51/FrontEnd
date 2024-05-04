@@ -1,9 +1,30 @@
+<script>
+
+export default {
+  data(){
+    return {
+      events: []
+    }
+  },
+  created() {
+    fetch("http://localhost:3000/eventos").then(response => {
+      return response.json()
+    }).then(data => {
+      this.events = data
+    }).catch(error => {
+      console.log(error)
+    })
+  }
+
+}
+</script>
+
 <template>
   <div class="container">
     <h1>¡Publicación exitosa!</h1>
     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Eo_circle_green_checkmark.svg/2048px-Eo_circle_green_checkmark.svg.png" alt="Descripción de la imagen" class="imagen-check">
-    <div class="mensaje">
-      <p>Este evento se llevara a cabo el dia 02/05 de mayo de 2024 desde las 18:00 PM hasta las 19:30 PM.</p>
+    <div v-if="events.length > 0" class="mensaje" style="width: 22rem; overflow: hidden;">
+      <p>Este evento se llevara a cabo el dia {{ events[0].fecha }}  desde las {{ events[0].hora }}.</p>
     </div>
     <div class="button-container">
       <router-link to="/details" style="text-decoration: none" class="button-link">
