@@ -31,6 +31,11 @@ export default {
     InputGroupAddon,
     InputGroup,
     InputNumber
+  },
+  methods: {
+    goToAddEvents() {
+      this.$router.push('/add-details');
+    },
   }
 }
 </script>
@@ -119,7 +124,7 @@ export default {
                 </AccordionTab>
               </Accordion>
             </div>
-            <Button class="btn_crearevento" label="Crear Evento" icon="pi pi-check"/>
+            <Button class="btn_crearevento" label="Siguiente paso" icon="pi pi-check" @click="goToAddEvents"/>
           </div>
         </div>
       </div>
