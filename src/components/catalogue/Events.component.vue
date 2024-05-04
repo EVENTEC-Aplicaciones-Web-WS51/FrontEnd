@@ -30,12 +30,16 @@ export default {
     goToCalendar() {
       this.$router.push('/event-calendar');
     },
+    goToManage() {
+      this.$router.push('/manage-events');
+    },
   }
 }
 </script>
 
 <template>
   <div>Consumo de API</div>
+  <Button label="Gestionar" severity="secondary" outlined class="w-full" @click="goToManage"></Button>
 <div class="flex flex-wrap">
   <Card class="w-1/4 p-2 card-margin" style="width: 22rem; overflow: hidden;" v-for="event in events" :key="event.id">
     <template #header>
@@ -55,6 +59,7 @@ export default {
         <Button label="Comprar" class="w-full"></Button>
       </div>
     </template>
+
   </Card>
 </div>
 
