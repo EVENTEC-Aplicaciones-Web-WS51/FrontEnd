@@ -14,7 +14,9 @@
     </template>
     <template #footer>
       <div class="flex gap-3 mt-1">
+        <router-link to="/details" severity="secondary" outlined class="w-full">
         <Button label="Ver detalles" severity="secondary" outlined class="w-full"></Button>
+        </router-link>
         <Button label="Comprar" class="w-full"></Button>
       </div>
     </template>
