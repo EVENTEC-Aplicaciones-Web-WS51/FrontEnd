@@ -32,10 +32,10 @@ export default {
         <input type="text" placeholder="Buscar"/>
         <span><i class="ri-search-line"></i></span>
       </div>
-      <div class="login" v-if="isLoginVisible" @click="toggleLogin">
+      <router-link to="/login" class="login" v-if="isLoginVisible" @click="toggleLogin">
         Login
         <span><i class="ri-user-3-fill"></i></span>
-      </div>
+      </router-link>
     </nav>
   </div>
 
