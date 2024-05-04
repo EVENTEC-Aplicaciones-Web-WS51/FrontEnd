@@ -36,6 +36,9 @@ export default {
     goToAddEvents() {
       this.$router.push('/add-details');
     },
+    goToEventForm() {
+      this.$router.push('/event-form');
+    },
   }
 }
 </script>
@@ -124,7 +127,7 @@ export default {
                 </AccordionTab>
               </Accordion>
             </div>
-            <Button class="btn_crearevento" label="Siguiente paso" icon="pi pi-check" @click="goToAddEvents"/>
+            <Button class="btn_crearevento" label="Siguiente paso" icon="pi pi-check" @click="goToEventForm"/>
           </div>
         </div>
       </div>
