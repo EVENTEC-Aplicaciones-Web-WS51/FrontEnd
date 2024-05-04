@@ -6,6 +6,7 @@ import ContactComponent from "@/components/contact/Contact.component.vue";
 import LoginComponent from "@/components/login/Login.component.vue";
 import EventCalendarComponent from "@/components/calendar/EventCalendar.component.vue";
 import AddDetailsComponent from "@/components/add-details/AddDetails.component.vue";
+import ConfirmationpublicationComponent from "@/components/confirmation/Confirmationpublication.component.vue";
 
 
 
@@ -17,6 +18,7 @@ const routes = [
     { path: '/contact', component: ContactComponent },
     { path: '/event-calendar', component: EventCalendarComponent },
     { path: '/add-details', component: AddDetailsComponent },
+    { path: '/confirmation', component: ConfirmationpublicationComponent },
 
     { path: '/login', component: LoginComponent },
 
