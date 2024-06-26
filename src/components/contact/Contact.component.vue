@@ -5,10 +5,6 @@
          @mouseleave="handleMouseLeave"
          @mouseup="handleMouseUp"
          @mousemove="handleMouseMove">
-      <img src="@/assets/images/tarjetas/michael_carmelino.png" alt="img" draggable="false">
-      <img src="@/assets/images/tarjetas/mario.png" alt="img" draggable="false">
-      <img src="@/assets/images/tarjetas/piero.png" alt="img" draggable="false">
-      <img src="@/assets/images/tarjetas/alessandro.png" alt="img" draggable="false">
       <img src="@/assets/images/tarjetas/alejandro.png" alt="img" draggable="false">
     </div>
   </div>
