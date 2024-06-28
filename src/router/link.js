@@ -9,11 +9,12 @@ import AddDetailsComponent from "@/components/add-details/AddDetails.component.v
 import ConfirmationpublicationComponent from "@/components/confirmation/Confirmationpublication.component.vue";
 import EventFormComponent from "@/components/eventform/EventForm.component.vue";
 import ManageEventsComponent from "@/components/CRUD/manage-events.component.vue";
+import RegisterComponent from "@/components/login/Register.component.vue";
 
 
 
 const routes = [
-    { path: '/', component: HomeComponent },
+    { path: '/', component: LoginComponent },
     { path: '/home', component: HomeComponent },
     { path: '/catalogue', component: CatalogueComponent },
     { path: '/about', component: AboutComponent },
@@ -26,6 +27,7 @@ const routes = [
     { path: '/manage-events', component: ManageEventsComponent },
 
     { path: '/login', component: LoginComponent },
+    { path: '/register', component: RegisterComponent },
 
 ]
 

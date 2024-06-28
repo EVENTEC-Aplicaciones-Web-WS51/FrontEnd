@@ -1,4 +1,4 @@
-# myevent
+# MyEvent
 
 ## Project setup
 ```

@@ -1,82 +1,80 @@
 <script>
-import Card from 'primevue/card';
-import Button from 'primevue/button';
+import { TheProductBackendService } from '@/services/the-product-backend.service.js'
 export default {
-  name: "EventsComponent",
-  data(){
+  name: 'ProductCatalog',
+  data() {
     return {
-      events: []
+      products: []
     }
   },
-
-
-
-  components: {
-    Card,
-    Button
+  async created() {
+    //const service = new ProductCatalogService();
+    const service = new TheProductBackendService();
+    this.products = await service.getAll();
   },
-
-  created() {
-    fetch("http://localhost:3000/eventos").then(response => {
-      return response.json()
-    }).then(data => {
-      this.events = data
-    }).catch(error => {
-      console.log(error)
-    })
-  },
-
   methods: {
-    goToCalendar() {
-      this.$router.push('/event-calendar');
-    },
-    goToManage() {
-      this.$router.push('/manage-events');
-    },
+    goToProductDetail(productId) {
+      this.$router.push(`/product_detail/${productId}`);
+    }
   }
 }
 </script>
 
 <template>
-  <div>Consumo de API</div>
-  <Button label="Gestionar" severity="secondary" outlined class="w-full" @click="goToManage"></Button>
-<div class="flex flex-wrap">
-  <Card class="w-1/4 p-2 card-margin" style="width: 22rem; overflow: hidden;" v-for="event in events" :key="event.id">
-    <template #header>
-      <img alt="user header" :src="require('@/assets/data/' + event.imagen)"/>
-    </template>
-    <template #title>{{event.nombre}}</template>
-    <template #subtitle>{{event.tipo}}</template>
-    <template #content>
-      <p class="m-0">
-        {{event.descripcion}}
-      </p>
-    </template>
-    <template #footer>
-      <div class="flex gap-3 mt-1">
-        <!-- -->
-        <Button label="Ver detalles" severity="secondary" outlined class="w-full" @click="goToCalendar"></Button>
-        <Button label="Comprar" class="w-full"></Button>
+  <div>Consumo de Eventos</div>
+  <div class="flex flex-wrap">
+    <div v-for="product in products" :key="product.nombre" class="product">
+      <img class="product-image" :src="product.imagen" :alt="product.nombre">
+      <div class="product-info">
+        <h2 class="product-name">{{ product.nombre }}</h2>
+        <p class="product-description">{{ product.descripcion }}</p>
+        <div class="product-price" @click="goToProductDetail(product.id)">{{ product.product }}: {{ product.precio }}</div>
       </div>
-    </template>
-
-  </Card>
-</div>
-
+    </div>
+  </div>
 
 </template>
 
 
-
 <style scoped>
-.card-margin {
-  margin: 1rem;
+.product {
+  display: flex;
+  position: relative;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #9b9b9b;
 }
-img{
-  width: 100%;
-  height: 320px;
+
+.product-image {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  margin-top: 20px;
+  margin-left: 20px;
+  margin-bottom:20px;
+  border: 1px solid #000;
 }
 
+.product-info {
+  margin-left: 20px;
+}
 
+.product-name {
+  font-weight: bold;
+}
 
+.product-description {
+  margin-top: 10px;
+}
+
+.product-price {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  padding: 10px;
+  border: 1px solid #000;
+  border-radius: 10px;
+  width: fit-content;
+  background-color: #449AFF;
+  cursor: pointer;
+}
 </style>

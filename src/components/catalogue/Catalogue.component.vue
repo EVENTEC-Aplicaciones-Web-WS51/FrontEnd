@@ -23,6 +23,7 @@ export default {
 
         <div class="card-container">
 
+
           <events-component></events-component>
 
         </div>
