@@ -16,7 +16,9 @@ export default {
     goToProductDetail(productId) {
       this.$router.push(`/product_detail/${productId}`);
     },
-    goToCheckout() {
+    goToCheckout(productId) {
+      // Guarda el productId en el localStorage
+      localStorage.setItem('selectedProductId', productId);
       this.$router.push(`/checkout`);
     }
   }
@@ -35,7 +37,7 @@ export default {
         <div class="product-info">
           <p class="product-name" @click="goToProductDetail(product.id)">S/.{{ product.product }} {{ product.precio }}</p>
           <h2 class="product-name">{{ product.nombre }}</h2>
-          <button class="product-name" @click="goToCheckout">Comprar</button>
+          <button class="product-name" @click="goToCheckout(product.id)">Comprar</button>
         </div>
       </div>
     </Card>

@@ -1,46 +1,54 @@
+<template>
+  <div class="container">
+    <div class="destination__container">
+      <!-- Encabezado y otros elementos del layout -->
+      <div class="event" id="eventos">
+        <h2>Completar compra</h2>
+
+        <!-- Mostrar detalles del producto -->
+        <div v-if="product">
+          <img :src="product.imagen" :alt="product.nombre">
+          <h3>{{ product.nombre }}</h3>
+          <p>{{ product.descripcion }}</p>
+          <p>Precio: S/. {{ product.precio }}</p>
+          <button @click="goToCheckout">Comprar</button>
+        </div>
+        <div v-else>
+          <p>Cargando detalles del producto...</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
 <script>
-import {TheProductBackendService} from '@/services/the-product-backend.service.js'
+import { TheProductBackendService } from '@/services/the-product-backend.service.js';
 
 export default {
   name: 'CheckoutComponent',
   data() {
     return {
-      products: []
-    }
+      product: null
+    };
   },
   async created() {
-    //const service = new ProductCatalogService();
     const service = new TheProductBackendService();
-    this.products = await service.getAll();
+    const productId = localStorage.getItem('selectedProductId');
+    if (productId) {
+      try {
+        this.product = await service.getProductDetail(productId);
+      } catch (error) {
+        console.error('Error fetching product details:', error);
+      }
+    }
   },
   methods: {
-    goToProductDetail(productId) {
-      this.$router.push(`/product_detail/${productId}`);
+    goToCheckout() {
+      this.$router.push('/checkout');
     }
   }
-}
+};
 </script>
-
-<template>
-
-  <div class="container">
-    <div class="destination__container">
-      <img class="bg__img__1" src="@/assets/images/puntos.png" alt="bg"/>
-      <img class="bg__img__2" src="@/assets/images/flechas.png" alt="bg"/>
-
-      <div class="socials"></div>
-
-      <div class="event" id="eventos">
-        <h2>Completar compra</h2>
-
-
-      </div>
-    </div>
-  </div>
-
-
-</template>
-
 
 <style scoped>
 .product {
@@ -84,8 +92,6 @@ p {
   allign-items: center;
   font-size: small;
 }
-
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap");
 
 :root {
   --primary-color: #0B3C5D;

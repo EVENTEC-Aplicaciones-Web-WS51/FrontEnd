@@ -15,8 +15,9 @@ import CheckoutComponent from "@/components/checkout/Checkout.component.vue";
 
 
 
+
 const routes = [
-    { path: '/', component: LoginComponent },
+    { path: '/', component: HomeComponent },
     { path: '/home', component: HomeComponent },
     { path: '/catalogue', component: CatalogueComponent },
     { path: '/product_detail/:id', component: EventDetailsComponent },
