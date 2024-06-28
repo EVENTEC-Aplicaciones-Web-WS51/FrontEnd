@@ -1,73 +1,156 @@
 <template>
-  <div class="wrapper">
-    <div class="carousel"
-         @mousedown="handleMouseDown"
-         @mouseleave="handleMouseLeave"
-         @mouseup="handleMouseUp"
-         @mousemove="handleMouseMove">
-      <img src="@/assets/images/tarjetas/alejandro.png" alt="img" draggable="false">
-    </div>
-  </div>
+  <form @submit.prevent="submitForm">
+    <section class="contact-section">
+      <div class="contact-intro">
+        <h2 class="contact-title">Get in Touch</h2>
+        <p class="contact-description">
+          Fill out the form below and we'll get back to you as soon as possible.
+        </p>
+      </div>
+
+      <form class="contact-form" action="https://api.web3forms.com/submit" method="POST">
+
+        <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE" />
+        <input type="hidden" name="subject" value="New Contact Form Submission from Web3Forms" />
+        <input type="hidden" name="from_name" value="My Website" />
+        <!-- More custom ization options available in the docs: https://docs.web3forms.com -->
+
+        <div class="form-group-container">
+          <div class="form-group">
+            <label for="name" class="form-label">Name</label>
+            <input v-model="name" id="name" name="name" class="form-input" placeholder="Your name" type="text" />
+          </div>
+          <div class="form-group">
+            <label for="email" class="form-label">Email</label>
+            <input v-model="email" id="email" name="email" class="form-input" placeholder="Your email" type="email" />
+          </div>
+          <div class="form-group">
+            <label for="phone" class="form-label">Phone</label>
+            <input v-model="message" id="phone" name="phone" class="form-input" placeholder="+1 (234) 56789" type="text" />
+          </div>
+          <div class="form-group">
+            <label for="message" class="form-label">Message</label>
+            <textarea class="form-textarea" id="message" name="message" placeholder="Your message"></textarea>
+          </div>
+        </div>
+        <button class="form-submit" type="submit">Send Message</button>
+      </form>
+
+    </section>
+
+  </form>
+
 </template>
 
 <script>
+const WEB3FORMS_ACCESS_KEY = "e2c32ce6-a37f-4633-b433-f620757a8f90";
+
 export default {
-  name: "ContactComponent",
+  name: "ContactForm",
   data() {
     return {
-      isDown: false,
-      startX: 0,
-      scrollLeft: 0
+      name: "",
+      email: "",
+      message: "",
     };
   },
   methods: {
-    handleMouseDown(e) {
-      this.isDown = true;
-      this.startX = e.pageX - e.target.offsetLeft;
-      this.scrollLeft = e.target.scrollLeft;
+    async submitForm() {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          access_key: WEB3FORMS_ACCESS_KEY,
+          name: this.name,
+          email: this.email,
+          message: this.message,
+        }),
+      });
+      const result = await response.json();
+      if (result.success) {
+        console.log(result);
+      }
     },
-    handleMouseLeave() {
-      this.isDown = false;
-    },
-    handleMouseUp() {
-      this.isDown = false;
-    },
-    handleMouseMove(e) {
-      if (!this.isDown) return;
-      e.preventDefault();
-      const x = e.pageX - e.target.offsetLeft;
-      const walk = (x - this.startX) * 3; //scroll-fast
-      e.target.scrollLeft = this.scrollLeft - walk;
-    }
-  }
+  },
 };
-
 </script>
 
 <style scoped>
-.wrapper {
-  margin-top: 100px; /* Ajusta este valor a tus necesidades */
+.contact-section {
+  width: 100%;
+  max-width: 40rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 3rem 1rem;
+  color: #eeeeee;
 }
-.carousel {
+
+.contact-intro > * + * {
+  margin-top: 1rem;
+}
+
+.contact-title {
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+  font-weight: 700;
+}
+
+.contact-description {
+  color: #eeeeee;
+}
+
+.form-group-container {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: repeat(2, 1fr);
-  grid-template-areas:
-    "card1 card2"
-    "card3 card4"
-    "card5 card5";
-  gap: 20px;
-  justify-items: center;
+  gap: 1rem;
+  margin-top: 2rem;
 }
 
-.carousel img:nth-child(1) { grid-area: card1; }
-.carousel img:nth-child(2) { grid-area: card2; }
-.carousel img:nth-child(3) { grid-area: card3; }
-.carousel img:nth-child(4) { grid-area: card4; }
-.carousel img:nth-child(5) { grid-area: card5; }
-
-.carousel img {
-  width: 400px; /* Ajusta este valor a tus necesidades */
-  height: 200px; /* Ajusta este valor a tus necesidades */
+.form-group {
+  display: flex;
+  flex-direction: column;
 }
+
+.form-label {
+  margin-bottom: 0.5rem;
+}
+
+.form-input,
+.form-textarea {
+  padding: 0.5rem;
+  border: 1px solid #e5e7eb;
+  display: flex;
+  height: 2.5rem;
+  width: 100%;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.form-input::placeholder,
+.form-textarea:focus-visible {
+  color: #6b7280;
+}
+
+.form-input:focus-visible,
+.form-textarea:focus-visible {
+  outline: 2px solid #2563eb;
+  outline-offset: 2px;
+}
+
+.form-textarea {
+  min-height: 120px;
+}
+
+.form-submit {
+  width: 100%;
+  margin-top: 1.2rem;
+  background-color: #3124ca;
+  color: #fff;
+  padding: 13px 5px;
+  border-radius: 0.375rem;
+}
+
 </style>

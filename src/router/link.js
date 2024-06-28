@@ -10,6 +10,8 @@ import ConfirmationpublicationComponent from "@/components/confirmation/Confirma
 import EventFormComponent from "@/components/eventform/EventForm.component.vue";
 import ManageEventsComponent from "@/components/CRUD/manage-events.component.vue";
 import RegisterComponent from "@/components/login/Register.component.vue";
+import EventDetailsComponent from "@/components/catalogue/EventDetails.component.vue";
+import CheckoutComponent from "@/components/checkout/Checkout.component.vue";
 
 
 
@@ -17,12 +19,14 @@ const routes = [
     { path: '/', component: LoginComponent },
     { path: '/home', component: HomeComponent },
     { path: '/catalogue', component: CatalogueComponent },
+    { path: '/product_detail/:id', component: EventDetailsComponent },
     { path: '/about', component: AboutComponent },
     { path: '/contact', component: ContactComponent },
     { path: '/event-calendar', component: EventCalendarComponent },
     { path: '/add-details', component: AddDetailsComponent },
     { path: '/confirmation', component: ConfirmationpublicationComponent },
     { path: '/event-form', component: EventFormComponent },
+    { path: '/checkout', component: CheckoutComponent },
 
     { path: '/manage-events', component: ManageEventsComponent },
 
