@@ -4,13 +4,15 @@ export default {
   name: 'ProductCatalog',
   data() {
     return {
-      products: []
+      products: [],
+      isLoggedIn: false
     }
   },
   async created() {
     //const service = new ProductCatalogService();
     const service = new TheProductBackendService();
     this.products = await service.getAll();
+    this.checkLoginStatus();
   },
   methods: {
     goToProductDetail(productId) {
@@ -20,6 +22,18 @@ export default {
       // Guarda el productId en el localStorage
       localStorage.setItem('selectedProductId', productId);
       this.$router.push(`/checkout`);
+    },
+    async deleteProduct(productId) {
+      const service = new TheProductBackendService();
+      await service.deleteProduct(productId);
+      // Actualiza la lista de productos después de eliminar uno
+      this.products = await service.getAll();
+    },
+    checkLoginStatus() {
+      const token = localStorage.getItem('userToken');
+      if (token) {
+        this.isLoggedIn = true;
+      }
     }
   }
 }
@@ -38,6 +52,7 @@ export default {
           <p class="product-name" @click="goToProductDetail(product.id)">S/.{{ product.product }} {{ product.precio }}</p>
           <h2 class="product-name">{{ product.nombre }}</h2>
           <button class="product-name" @click="goToCheckout(product.id)">Comprar</button>
+          <button class="product-name" v-if="isLoggedIn" @click="deleteProduct(product.id)">Eliminar</button>
         </div>
       </div>
     </Card>

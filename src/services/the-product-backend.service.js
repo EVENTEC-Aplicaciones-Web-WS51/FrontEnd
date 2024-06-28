@@ -30,5 +30,15 @@ export class TheProductBackendService {
       throw error; // Manejo de errores según tu necesidad
     }
   }
+
+  async deleteProduct(id) {
+    try {
+      const response = await http.delete(`products/${id}`);
+      return response.data; // Devuelve la respuesta del servidor
+    } catch (error) {
+      console.error('Error deleting product:', error);
+      throw error; // Manejo de errores según tu necesidad
+    }
+  }
 }
 
